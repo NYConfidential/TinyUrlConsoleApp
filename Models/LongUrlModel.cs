@@ -94,7 +94,7 @@ namespace TinyUrlConsoleApp
         {
             lock(_lockObject)
             {
-                return _tinyURLMap.GetValueByKey(url);
+                return _tinyURLMap.GetValue(url);
             }
 
         }

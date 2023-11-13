@@ -21,7 +21,7 @@ namespace TinyUrlConsoleApp
         {
             string parentUrl = tinyModel.ParentLongUrlModel.Url;
 
-            ILongUrlModel? longModel = _longURLMap.GetValueByKey(parentUrl);
+            ILongUrlModel? longModel = _longURLMap.GetValue(parentUrl);
 
             if(longModel is null)
             {
@@ -112,7 +112,7 @@ namespace TinyUrlConsoleApp
         public void Add(IList<string> requestParams)
         {
             ILongUrlModel longUrlModel =
-                _longURLMap.GetValueByKey(requestParams[0]) ??
+                _longURLMap.GetValue(requestParams[0]) ??
                     new LongUrlModel(requestParams[0]);
 
             List<ITinyURLModel> tinyURLs = new();
@@ -146,7 +146,7 @@ namespace TinyUrlConsoleApp
         {
             foreach(string url in longUrls)
             {
-                ILongUrlModel? longModel = _longURLMap.GetValueByKey(url);
+                ILongUrlModel? longModel = _longURLMap.GetValue(url);
 
                 if(longModel != null)
                 {
@@ -168,14 +168,14 @@ namespace TinyUrlConsoleApp
         {
             foreach(string url in tinyUrls)
             {
-                ITinyURLModel? tinyModel = _tinyURLMap.GetValueByKey(url);
+                ITinyURLModel? tinyModel = _tinyURLMap.GetValue(url);
 
                 if(tinyModel is null)
                 {
                     throw new ArgumentNullException($"TinyUrl:{url} Not Found");
                 }
 
-                ILongUrlModel? longModel = _longURLMap.GetValueByKey(tinyModel.ParentLongUrlModel.Url);
+                ILongUrlModel? longModel = _longURLMap.GetValue(tinyModel.ParentLongUrlModel.Url);
 
                 if(longModel is null)
                 {
@@ -190,7 +190,7 @@ namespace TinyUrlConsoleApp
 
         public void Click(string tinyURLClicked)
         {
-            ITinyURLModel? tinyUrl = _tinyURLMap.GetValueByKey(tinyURLClicked);
+            ITinyURLModel? tinyUrl = _tinyURLMap.GetValue(tinyURLClicked);
 
             if(tinyUrl != null)
             {

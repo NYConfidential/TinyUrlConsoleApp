@@ -28,15 +28,15 @@
 
         public void DisplayAllLongUrls(bool includeTinyUrls = false)
         {
-            IEnumerable<ILongUrlModel> data = _longURLMap.GetAllValues();
+            IEnumerable<ILongUrlModel> longUrls = _longURLMap.GetAllValues();
 
-            if(!data.Any())
+            if(!longUrls.Any())
             {
-                WriteToConsole("Not Found");
+                WriteToConsole($"{nameof(longUrls)} Not Found");
             }
             else
             {
-                foreach(ILongUrlModel longUrlModel in data)
+                foreach(ILongUrlModel longUrlModel in longUrls)
                 {
                     if(includeTinyUrls)
                     {
@@ -53,7 +53,7 @@
 
         public void DisplayAllTinyUrlsForLongUrl(string longUrl)
         {
-            ILongUrlModel? longUrlModel = _longURLMap.GetValueByKey(longUrl);
+            ILongUrlModel? longUrlModel = _longURLMap.GetValue(longUrl);
 
             if(longUrlModel != null)
             {
@@ -61,7 +61,6 @@
                 WriteToConsole($"All TinyUrl's linked:", false);
                 WriteToConsole(longUrlModel.AllTinyUrls.Select(d => d.Url).ToList());
             }
-
             else
             {
                 throw new DataMisalignedException($"{nameof(longUrlModel)} Not Found");
@@ -70,7 +69,7 @@
 
         public void DisplayLongUrl(string tinyUrl)
         {
-            ITinyURLModel? model = _tinyURLMap.GetValueByKey(tinyUrl);
+            ITinyURLModel? model = _tinyURLMap.GetValue(tinyUrl);
 
             if(model != null)
             {
@@ -85,7 +84,7 @@
 
         public void DisplayClickCount(string tinyUrl)
         {
-            ITinyURLModel? model = _tinyURLMap.GetValueByKey(tinyUrl);
+            ITinyURLModel? model = _tinyURLMap.GetValue(tinyUrl);
 
             if(model != null)
             {
@@ -99,7 +98,7 @@
 
         public void DisplayRedirectsCount(string longUrl)
         {
-            ILongUrlModel? model = _longURLMap.GetValueByKey(longUrl);
+            ILongUrlModel? model = _longURLMap.GetValue(longUrl);
 
             if(model != null)
             {

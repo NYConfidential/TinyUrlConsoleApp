@@ -19,6 +19,11 @@ namespace TinyUrlConsoleApp.Utilities
         private readonly ReaderWriterLockSlim _readerWriterLockSlim = new();
         private readonly string _mapName;
 
+        public DataMap(string mapName)
+        {
+            _mapName = mapName;
+        }
+
         public event Action<TData>? OnDataDeleted;
 
         event Action<TData>? IDataMap<TData>.OnDataDeleted
@@ -33,11 +38,6 @@ namespace TinyUrlConsoleApp.Utilities
             {
                 OnDataDeleted(data);
             }
-        }
-
-        public DataMap(string mapName)
-        {
-            _mapName = mapName;
         }
 
         private void ModifyMap(TData data, ModifyDataEnum operation)
@@ -137,7 +137,7 @@ namespace TinyUrlConsoleApp.Utilities
             }
         }
 
-        public TData? GetValueByKey(TKey key)
+        public TData? GetValue(TKey key)
         {
             _readerWriterLockSlim.EnterReadLock();
             try
