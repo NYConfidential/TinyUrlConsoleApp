@@ -62,6 +62,7 @@ namespace TinyUrlConsoleApp
             }
             else
             {
+                Reporter.WriteToConsole("*********", false);
                 _tinyURLDataRepository.ProcessRequest(processInput);
 
                 processInput = Console.ReadLine() ?? "";

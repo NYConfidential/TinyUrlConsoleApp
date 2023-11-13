@@ -196,6 +196,10 @@ namespace TinyUrlConsoleApp
             {
                 tinyUrl.AddClick();
             }
+            else
+            {
+                throw new ArgumentNullException($"TinyUrl:{tinyURLClicked} Not Found");
+            }
 
         }
 
